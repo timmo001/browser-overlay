@@ -5,7 +5,8 @@ import Head from "next/head";
 
 const Glow: NextPage = () => {
   const router = useRouter();
-  const { glow, height, type, width } = router.query as NodeJS.Dict<string>;
+  const { glow, height, thick, type, width } =
+    router.query as NodeJS.Dict<string>;
 
   return (
     <>
@@ -19,10 +20,9 @@ const Glow: NextPage = () => {
         component="main"
         sx={{
           height: "100%",
-        }}
-      >
+        }}>
         <Box
-          className={`border ${type}`}
+          className={`${thick === "true" ? "border-thick" : "border"} ${type}`}
           sx={{
             position: "fixed",
             left: "50%",

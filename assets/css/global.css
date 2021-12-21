@@ -28,3 +28,13 @@ body {
   width: calc(100% + 6px);
   height: calc(100% + 6px);
 }
+
+.border-thick:before,
+.border-thick:after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+}

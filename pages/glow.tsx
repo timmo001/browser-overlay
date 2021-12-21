@@ -5,12 +5,12 @@ import Head from "next/head";
 
 const RainbowGlow: NextPage = () => {
   const router = useRouter();
-  const { glow, height, width } = router.query;
+  const { glow, height, type, width } = router.query;
 
   return (
     <>
       <Head>
-        <title>Rainbow Glow - Stream Overlay</title>
+        <title>Glow - Stream Overlay</title>
         <meta name="description" content="Stream Overlay" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <link rel="icon" href="/favicon.ico" />
@@ -19,10 +19,9 @@ const RainbowGlow: NextPage = () => {
         component="main"
         sx={{
           height: "100%",
-        }}
-      >
+        }}>
         <Box
-          className="rainbow-glow"
+          className={`${type}`}
           sx={{
             position: "fixed",
             left: "50%",
@@ -34,7 +33,7 @@ const RainbowGlow: NextPage = () => {
               filter: `blur(${Number(glow) || 40}px) !important`,
             },
           }}
-        />{" "}
+        />
       </Box>
     </>
   );

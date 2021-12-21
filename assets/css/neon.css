@@ -1,0 +1,27 @@
+@keyframes palette {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.neon:before,
+.neon:after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  background: linear-gradient(45deg, red, blue) border-box;
+  mix-blend-mode: multiply;
+  background-size: 200%;
+  border-radius: 6px;
+  border: 4px solid transparent;
+  animation: palette 20s linear infinite;
+}

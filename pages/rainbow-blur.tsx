@@ -20,7 +20,8 @@ const Desktop: NextPage = () => {
         component="main"
         sx={{
           height: "100%",
-        }}>
+        }}
+      >
         <DesktopComponent />
       </Box>
     </>

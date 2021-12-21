@@ -19,8 +19,8 @@ body {
   }
 }
 
-.block:before,
-.block:after {
+.rainbow:before,
+.rainbow:after {
   content: "";
   position: absolute;
   top: -3px;
@@ -46,6 +46,6 @@ body {
   animation: borderbg 40s linear infinite;
 }
 
-.block:after {
+.rainbow:after {
   filter: blur(60px);
 }

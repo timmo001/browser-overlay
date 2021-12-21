@@ -9,7 +9,7 @@ function DesktopComponent(): ReactElement {
   return (
     <>
       <Box
-        className="block"
+        className="rainbow"
         sx={{
           position: "fixed",
           left: "50%",

@@ -1,32 +1,33 @@
 import type { ReactElement } from "react";
-import { Grid, Typography } from "@mui/material";
-import Moment from "react-moment";
+import { Grid } from "@mui/material";
 
-function GridComponent(): ReactElement {
+interface GridComponentProps {
+  items: Array<ReactElement>;
+}
+
+function GridComponent({ items }: GridComponentProps): ReactElement {
   return (
     <>
       <Grid container sx={{ height: "50%" }}>
         <Grid item xs={4}>
-          <Typography component="span" variant="h2"></Typography>
+          {items[0]}
         </Grid>
         <Grid item xs={4} sx={{ textAlign: "center" }}>
-          <Typography component="span" variant="h2">
-            <Moment format="HH:mm:ss" interval={500} />
-          </Typography>
+          {items[1]}
         </Grid>
         <Grid item xs={4} sx={{ textAlign: "right" }}>
-          <Typography component="span" variant="h2"></Typography>
+          {items[2]}
         </Grid>
       </Grid>
       <Grid container alignItems="flex-end" sx={{ height: "50%" }}>
         <Grid item xs={4}>
-          <Typography component="span" variant="h2"></Typography>
+          {items[3]}
         </Grid>
         <Grid item xs={4} sx={{ textAlign: "center" }}>
-          <Typography component="span" variant="h2"></Typography>
+          {items[4]}
         </Grid>
         <Grid item xs={4} sx={{ textAlign: "right" }}>
-          <Typography component="span" variant="h2"></Typography>
+          {items[5]}
         </Grid>
       </Grid>
     </>

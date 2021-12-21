@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/system";
 import Head from "next/head";
+import Moment from "react-moment";
 
 import GridComponent from "../components/grid";
 
@@ -21,9 +22,19 @@ const Home: NextPage = () => {
         sx={{
           padding: theme.spacing(2, 3),
           height: "100%",
-        }}
-      >
-        <GridComponent />
+        }}>
+        <GridComponent
+          items={[
+            <Typography key={0} component="span" variant="h2"></Typography>,
+            <Typography key={1} component="span" variant="h2">
+              <Moment format="HH:mm:ss" interval={500} />
+            </Typography>,
+            <Typography key={2} component="span" variant="h2"></Typography>,
+            <Typography key={3} component="span" variant="h2"></Typography>,
+            <Typography key={4} component="span" variant="h2"></Typography>,
+            <Typography key={5} component="span" variant="h2"></Typography>,
+          ]}
+        />
       </Box>
     </>
   );

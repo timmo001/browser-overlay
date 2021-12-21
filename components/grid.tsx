@@ -24,9 +24,7 @@ function GridComponent(): ReactElement {
           height: "50%",
         }}>
         <Grid item xs={6}>
-          <Typography component="span" variant="h2">
-            Hello
-          </Typography>
+          <Typography component="span" variant="h2"></Typography>
         </Grid>
         <Grid
           item
@@ -34,9 +32,7 @@ function GridComponent(): ReactElement {
           sx={{
             textAlign: "right",
           }}>
-          <Typography component="span" variant="h2">
-            World
-          </Typography>
+          <Typography component="span" variant="h2"></Typography>
         </Grid>
       </Grid>
     </>

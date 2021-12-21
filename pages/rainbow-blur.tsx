@@ -6,8 +6,6 @@ import Head from "next/head";
 import DesktopComponent from "../components/desktop";
 
 const Desktop: NextPage = () => {
-  const theme = useTheme();
-
   return (
     <>
       <Head>

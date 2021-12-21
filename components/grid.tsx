@@ -10,7 +10,8 @@ function GridComponent(): ReactElement {
         sx={{
           height: "50%",
           textAlign: "center",
-        }}>
+        }}
+      >
         <Grid item xs={12}>
           <Typography component="span" variant="h2">
             <Moment format="HH:mm:ss" interval={500} />
@@ -22,7 +23,8 @@ function GridComponent(): ReactElement {
         alignItems="flex-end"
         sx={{
           height: "50%",
-        }}>
+        }}
+      >
         <Grid item xs={6}>
           <Typography component="span" variant="h2"></Typography>
         </Grid>
@@ -31,7 +33,8 @@ function GridComponent(): ReactElement {
           xs={6}
           sx={{
             textAlign: "right",
-          }}>
+          }}
+        >
           <Typography component="span" variant="h2"></Typography>
         </Grid>
       </Grid>

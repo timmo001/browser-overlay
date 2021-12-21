@@ -47,5 +47,5 @@ body {
 }
 
 .rainbow:after {
-  filter: blur(60px);
+  filter: blur(40px);
 }

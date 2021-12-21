@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 
 function DesktopComponent(): ReactElement {
   const router = useRouter();
-  const { height, width } = router.query;
+  const { blur, height, width } = router.query;
 
   return (
     <>
@@ -17,6 +17,9 @@ function DesktopComponent(): ReactElement {
           transform: "translate(-50%, -50%)",
           height: Number(height) || 880,
           width: Number(width) || 1408,
+          "&:after": {
+            filter: `blur(${Number(blur) || 40}px) !important`,
+          },
         }}
       />
     </>

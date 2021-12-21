@@ -21,7 +21,7 @@ const RainbowGlow: NextPage = () => {
           height: "100%",
         }}>
         <Box
-          className="rainbow"
+          className="rainbow-glow"
           sx={{
             position: "fixed",
             left: "50%",

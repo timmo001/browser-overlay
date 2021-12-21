@@ -20,7 +20,8 @@ const Glow: NextPage = () => {
         component="main"
         sx={{
           height: "100%",
-        }}>
+        }}
+      >
         <Box
           className={`${thick === "true" ? "border-thick" : "border"} ${type}`}
           sx={{

@@ -9,6 +9,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import "../assets/css/global.css";
+import "../assets/css/rainbow-glow.css";
 
 const theme = createTheme({
   palette: {

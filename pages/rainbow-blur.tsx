@@ -11,7 +11,7 @@ const Desktop: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Desktop - Stream Overlay</title>
+        <title>Rainbow Blur - Stream Overlay</title>
         <meta name="description" content="Stream Overlay" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <link rel="icon" href="/favicon.ico" />

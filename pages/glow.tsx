@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { Box } from "@mui/material";
 import Head from "next/head";
 
-const RainbowGlow: NextPage = () => {
+const Glow: NextPage = () => {
   const router = useRouter();
-  const { glow, height, type, width } = router.query;
+  const { glow, height, type, width } = router.query as NodeJS.Dict<string>;
 
   return (
     <>
@@ -22,7 +22,7 @@ const RainbowGlow: NextPage = () => {
         }}
       >
         <Box
-          className={`${type}`}
+          className={`border ${type}`}
           sx={{
             position: "fixed",
             left: "50%",
@@ -40,4 +40,4 @@ const RainbowGlow: NextPage = () => {
   );
 };
 
-export default RainbowGlow;
+export default Glow;

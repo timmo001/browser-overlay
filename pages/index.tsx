@@ -22,8 +22,7 @@ const Home: NextPage = () => {
         sx={{
           padding: theme.spacing(2, 3),
           height: "100%",
-        }}
-      >
+        }}>
         <GridComponent
           items={[
             <Typography key={0} component="span" variant="h2"></Typography>,

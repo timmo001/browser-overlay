@@ -19,10 +19,8 @@ const Desktop: NextPage = () => {
       <Box
         component="main"
         sx={{
-          padding: theme.spacing(2, 3),
           height: "100%",
-        }}
-      >
+        }}>
         <DesktopComponent />
       </Box>
     </>

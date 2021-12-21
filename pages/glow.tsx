@@ -19,7 +19,8 @@ const RainbowGlow: NextPage = () => {
         component="main"
         sx={{
           height: "100%",
-        }}>
+        }}
+      >
         <Box
           className={`${type}`}
           sx={{

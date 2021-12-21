@@ -9,22 +9,11 @@ function GridComponent(): ReactElement {
         container
         sx={{
           height: "50%",
-        }}
-      >
-        <Grid item xs={6}>
+          textAlign: "center",
+        }}>
+        <Grid item xs={12}>
           <Typography component="span" variant="h2">
             <Moment format="HH:mm:ss" interval={500} />
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sx={{
-            textAlign: "right",
-          }}
-        >
-          <Typography component="span" variant="h2">
-            Hello
           </Typography>
         </Grid>
       </Grid>
@@ -33,11 +22,10 @@ function GridComponent(): ReactElement {
         alignItems="flex-end"
         sx={{
           height: "50%",
-        }}
-      >
+        }}>
         <Grid item xs={6}>
           <Typography component="span" variant="h2">
-            There
+            Hello
           </Typography>
         </Grid>
         <Grid
@@ -45,10 +33,9 @@ function GridComponent(): ReactElement {
           xs={6}
           sx={{
             textAlign: "right",
-          }}
-        >
+          }}>
           <Typography component="span" variant="h2">
-            Test
+            World
           </Typography>
         </Grid>
       </Grid>

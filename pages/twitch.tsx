@@ -78,8 +78,8 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
               sx={{
                 fontSize: 34,
               }}>
-              {channelsData.map((channel: ChannelData) => (
-                <span key={channel.name}>
+              {channelsData.map((channel: ChannelData, index: number) => (
+                <span key={index}>
                   <Icon
                     path={mdiCircle}
                     title={channel.live ? "Live" : "Offline"}

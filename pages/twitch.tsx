@@ -11,13 +11,6 @@ import Moment from "react-moment";
 import GridComponent from "../components/grid";
 import { Twitch } from "../lib/twitch";
 
-interface PageProps {
-  twitchCredentials: {
-    clientId: string;
-    clientSecret: string;
-  };
-}
-
 interface TwitchData {
   name: string;
   live: boolean;
@@ -34,12 +27,20 @@ interface TwitchData {
 
 let twitch: Twitch;
 
-const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
+const PageTwitch: NextPage = () => {
   const [twitchData, setTwitchData] = useState<TwitchData>();
 
   const router = useRouter();
-  const { channel, live, title, game, uptime, viewers } =
-    router.query as NodeJS.Dict<string>;
+  const {
+    channel,
+    clientId,
+    clientSecret,
+    game,
+    live,
+    title,
+    uptime,
+    viewers,
+  } = router.query as NodeJS.Dict<string>;
 
   const getData = useCallback(async () => {
     console.log("Get data..");
@@ -73,13 +74,10 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
   }, [channel]);
 
   useEffect(() => {
-    twitch = new Twitch(
-      twitchCredentials.clientId,
-      twitchCredentials.clientSecret
-    );
+    twitch = new Twitch(clientId, clientSecret);
     getData();
     setTimeout(async () => getData(), 60000);
-  }, [getData, twitchCredentials.clientId, twitchCredentials.clientSecret]);
+  }, [getData, clientId, clientSecret]);
 
   const visualLive = useMemo(
     () =>
@@ -90,8 +88,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           <Icon
             path={mdiCircle}
             title={twitchData.live ? "Live" : "Offline"}
@@ -115,8 +112,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           {twitchData.title}
         </Typography>
       ) : (
@@ -134,8 +130,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           <Icon path={mdiGamepad} title="Game" size={1} color="lightgrey" />{" "}
           {twitchData.game ? twitchData.game.name : ""}
         </Typography>
@@ -154,8 +149,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           <Icon
             path={mdiClockOutline}
             title="Time Since"
@@ -184,8 +178,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           <Icon path={mdiAccount} title="Viewers" size={1} color="lightgrey" />{" "}
           {twitchData.viewers}
         </Typography>
@@ -210,8 +203,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
         sx={{
           padding: theme.spacing(2, 3),
           height: "100%",
-        }}
-      >
+        }}>
         {twitchData ? (
           <GridComponent
             items={[
@@ -225,8 +217,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
                 variant="h2"
                 sx={{
                   fontSize: 34,
-                }}
-              ></Typography>,
+                }}></Typography>,
               visualViewers,
             ]}
           />
@@ -236,17 +227,6 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
       </Box>
     </>
   );
-};
-
-export const getServerSideProps = async () => {
-  return {
-    props: {
-      twitchCredentials: {
-        clientId: process.env.TWITCH_CLIENT_ID,
-        clientSecret: process.env.TWITCH_CLIENT_SECRET,
-      },
-    },
-  };
 };
 
 export default PageTwitch;

@@ -31,11 +31,15 @@ export class Twitch {
     return await user.getStream();
   }
 
-  getTagNames(tags: Array<HelixTag>): Array<string> {
-    const tagNames = [];
+  async getTagNames(tagsIds: Array<string>): Promise<Array<string> | null> {
+    const tags = await this.apiClient.tags.getStreamTagsByIds(tagsIds);
+    if (!tags) return null;
+    const tagNames: Array<string> = [];
     for (const tag of tags) {
-      const tagName = tag.getName("en");
-      if (tagName) tagNames.push(tagName);
+      if (tag) {
+        const name = tag.getName("en");
+        if (name) tagNames.push();
+      }
     }
     return tagNames;
   }

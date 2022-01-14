@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
-import { HelixGame, HelixTag, HelixUser } from "@twurple/api";
-import { mdiCircle } from "@mdi/js";
+import { mdiAccount, mdiCircle, mdiClockOutline, mdiGamepad } from "@mdi/js";
 import { useTheme } from "@mui/system";
 import Head from "next/head";
 import Icon from "@mdi/react";
+import Moment from "react-moment";
 
 import GridComponent from "../components/grid";
 import { Twitch } from "../lib/twitch";
@@ -25,7 +25,8 @@ interface TwitchData {
     name?: string;
     boxArtUrl?: string;
   };
-  tags?: Array<string>;
+  startDate?: Date;
+  tags?: Array<string> | null;
   thumbnail?: string;
   title?: string;
   viewers?: number;
@@ -39,43 +40,46 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
   const router = useRouter();
   const { channel } = router.query as NodeJS.Dict<string>;
 
+  const getData = useCallback(async () => {
+    console.log("getData");
+    if (!channel) return;
+    const stream = await twitch.getStream(channel);
+    if (!stream) {
+      setTwitchData({
+        name: channel,
+        live: false,
+      });
+      return;
+    }
+    console.log("stream:", stream);
+    const game = await stream.getGame();
+    const newTwitchData: TwitchData = {
+      name: (await stream.getUser()).displayName,
+      live: true,
+      game: game
+        ? {
+            name: game.name,
+            boxArtUrl: game.boxArtUrl,
+          }
+        : undefined,
+      startDate: stream.startDate,
+      tags: await twitch.getTagNames(stream.tagIds),
+      thumbnail: stream.thumbnailUrl,
+      title: stream.title,
+      viewers: stream.viewers,
+    };
+    console.log("Twitch data:", newTwitchData);
+    setTwitchData(newTwitchData);
+  }, [channel]);
+
   useEffect(() => {
-    (async () => {
-      twitch = new Twitch(
-        twitchCredentials.clientId,
-        twitchCredentials.clientSecret
-      );
-      if (channel) {
-        const stream = await twitch.getStream(channel);
-        if (!stream) {
-          setTwitchData({
-            name: channel,
-            live: false,
-          });
-          return;
-        }
-        console.log("stream:", stream);
-        const game = await stream.getGame();
-        const tags = await stream.getTags();
-        const newTwitchData: TwitchData = {
-          name: (await stream.getUser()).displayName,
-          live: true,
-          game: game
-            ? {
-                name: game.name,
-                boxArtUrl: game.boxArtUrl,
-              }
-            : undefined,
-          tags: twitch.getTagNames(tags),
-          thumbnail: stream.thumbnailUrl,
-          title: stream.title,
-          viewers: stream.viewers,
-        };
-        console.log("newTwitchData:", newTwitchData);
-        setTwitchData(newTwitchData);
-      }
-    })();
-  }, [channel, twitchCredentials.clientId, twitchCredentials.clientSecret]);
+    twitch = new Twitch(
+      twitchCredentials.clientId,
+      twitchCredentials.clientSecret
+    );
+    getData();
+    setTimeout(async () => getData(), 60000);
+  }, [getData, twitchCredentials.clientId, twitchCredentials.clientSecret]);
 
   const theme = useTheme();
 
@@ -107,7 +111,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
                   path={mdiCircle}
                   title={twitchData.live ? "Live" : "Offline"}
                   size={1}
-                  color={twitchData.live ? "red" : "gray"}
+                  color={twitchData.live ? "red" : "lightgray"}
                 />{" "}
                 {twitchData.name}
               </Typography>,
@@ -127,6 +131,12 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
                 sx={{
                   fontSize: 34,
                 }}>
+                <Icon
+                  path={mdiGamepad}
+                  title="Game"
+                  size={1}
+                  color="lightgrey"
+                />{" "}
                 {twitchData.game ? twitchData.game.name : "No game"}
               </Typography>,
               <Typography
@@ -135,7 +145,20 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
                 variant="h2"
                 sx={{
                   fontSize: 34,
-                }}></Typography>,
+                }}>
+                <Icon
+                  path={mdiClockOutline}
+                  title="Time Since"
+                  size={1}
+                  color="lightgrey"
+                />{" "}
+                <Moment
+                  date={twitchData.startDate}
+                  durationFromNow
+                  format="HH:mm:ss"
+                  interval={500}
+                />
+              </Typography>,
               <Typography
                 key={5}
                 component="span"
@@ -149,7 +172,15 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
                 variant="h2"
                 sx={{
                   fontSize: 34,
-                }}></Typography>,
+                }}>
+                <Icon
+                  path={mdiAccount}
+                  title="Viewers"
+                  size={1}
+                  color="lightgrey"
+                />{" "}
+                {twitchData.viewers}
+              </Typography>,
             ]}
           />
         ) : (

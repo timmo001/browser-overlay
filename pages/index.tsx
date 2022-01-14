@@ -6,7 +6,7 @@ import Moment from "react-moment";
 
 import GridComponent from "../components/grid";
 
-const Home: NextPage = () => {
+const PageHome: NextPage = () => {
   const theme = useTheme();
 
   return (
@@ -48,4 +48,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default PageHome;

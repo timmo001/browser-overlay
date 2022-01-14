@@ -22,7 +22,8 @@ const Home: NextPage = () => {
         sx={{
           padding: theme.spacing(2, 3),
           height: "100%",
-        }}>
+        }}
+      >
         <GridComponent
           items={[
             <Typography key={0} component="span" variant="h2"></Typography>,
@@ -35,7 +36,8 @@ const Home: NextPage = () => {
               variant="h2"
               sx={{
                 fontSize: 42,
-              }}>
+              }}
+            >
               <Moment format="HH:mm:ss" interval={500} />
             </Typography>,
             <Typography key={5} component="span" variant="h2"></Typography>,

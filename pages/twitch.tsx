@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
 import { mdiAccount, mdiCircle, mdiClockOutline, mdiGamepad } from "@mdi/js";
@@ -38,7 +38,8 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
   const [twitchData, setTwitchData] = useState<TwitchData>();
 
   const router = useRouter();
-  const { channel } = router.query as NodeJS.Dict<string>;
+  const { channel, live, title, game, uptime, viewers } =
+    router.query as NodeJS.Dict<string>;
 
   const getData = useCallback(async () => {
     console.log("Get data..");
@@ -80,6 +81,115 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
     setTimeout(async () => getData(), 60000);
   }, [getData, twitchCredentials.clientId, twitchCredentials.clientSecret]);
 
+  const visualLive = useMemo(
+    () =>
+      live === "true" && twitchData ? (
+        <Typography
+          key={0}
+          component="span"
+          variant="h2"
+          sx={{
+            fontSize: 34,
+          }}>
+          <Icon
+            path={mdiCircle}
+            title={twitchData.live ? "Live" : "Offline"}
+            size={1}
+            color={twitchData.live ? "red" : "lightgray"}
+          />{" "}
+          {twitchData.name}
+        </Typography>
+      ) : (
+        <Typography key={0} />
+      ),
+    [live, twitchData]
+  );
+
+  const visualTitle = useMemo(
+    () =>
+      title === "true" && twitchData ? (
+        <Typography
+          key={1}
+          component="span"
+          variant="h2"
+          sx={{
+            fontSize: 34,
+          }}>
+          {twitchData.title}
+        </Typography>
+      ) : (
+        <Typography key={1} />
+      ),
+    [title, twitchData]
+  );
+
+  const visualGame = useMemo(
+    () =>
+      game === "true" && twitchData ? (
+        <Typography
+          key={2}
+          component="span"
+          variant="h2"
+          sx={{
+            fontSize: 34,
+          }}>
+          <Icon path={mdiGamepad} title="Game" size={1} color="lightgrey" />{" "}
+          {twitchData.game ? twitchData.game.name : ""}
+        </Typography>
+      ) : (
+        <Typography key={2} />
+      ),
+    [game, twitchData]
+  );
+
+  const visualUptime = useMemo(
+    () =>
+      uptime === "true" && twitchData ? (
+        <Typography
+          key={3}
+          component="span"
+          variant="h2"
+          sx={{
+            fontSize: 34,
+          }}>
+          <Icon
+            path={mdiClockOutline}
+            title="Time Since"
+            size={1}
+            color="lightgrey"
+          />{" "}
+          <Moment
+            date={twitchData.startDate}
+            durationFromNow
+            format="HH:mm:ss"
+            interval={500}
+          />
+        </Typography>
+      ) : (
+        <Typography key={3} />
+      ),
+    [uptime, twitchData]
+  );
+
+  const visualViewers = useMemo(
+    () =>
+      viewers === "true" && twitchData ? (
+        <Typography
+          key={5}
+          component="span"
+          variant="h2"
+          sx={{
+            fontSize: 34,
+          }}>
+          <Icon path={mdiAccount} title="Viewers" size={1} color="lightgrey" />{" "}
+          {twitchData.viewers}
+        </Typography>
+      ) : (
+        <Typography key={5} />
+      ),
+    [viewers, twitchData]
+  );
+
   const theme = useTheme();
 
   return (
@@ -99,87 +209,18 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
         {twitchData ? (
           <GridComponent
             items={[
-              <Typography
-                key={0}
-                component="span"
-                variant="h2"
-                sx={{
-                  fontSize: 34,
-                }}>
-                <Icon
-                  path={mdiCircle}
-                  title={twitchData.live ? "Live" : "Offline"}
-                  size={1}
-                  color={twitchData.live ? "red" : "lightgray"}
-                />{" "}
-                {twitchData.name}
-              </Typography>,
-              <Typography
-                key={1}
-                component="span"
-                variant="h2"
-                sx={{
-                  fontSize: 34,
-                }}>
-                {twitchData.title}
-              </Typography>,
-              <Typography
-                key={3}
-                component="span"
-                variant="h2"
-                sx={{
-                  fontSize: 34,
-                }}>
-                <Icon
-                  path={mdiGamepad}
-                  title="Game"
-                  size={1}
-                  color="lightgrey"
-                />{" "}
-                {twitchData.game ? twitchData.game.name : "No game"}
-              </Typography>,
+              visualLive,
+              visualTitle,
+              visualGame,
+              visualUptime,
               <Typography
                 key={4}
                 component="span"
                 variant="h2"
                 sx={{
                   fontSize: 34,
-                }}>
-                <Icon
-                  path={mdiClockOutline}
-                  title="Time Since"
-                  size={1}
-                  color="lightgrey"
-                />{" "}
-                <Moment
-                  date={twitchData.startDate}
-                  durationFromNow
-                  format="HH:mm:ss"
-                  interval={500}
-                />
-              </Typography>,
-              <Typography
-                key={5}
-                component="span"
-                variant="h2"
-                sx={{
-                  fontSize: 34,
                 }}></Typography>,
-              <Typography
-                key={6}
-                component="span"
-                variant="h2"
-                sx={{
-                  fontSize: 34,
-                }}>
-                <Icon
-                  path={mdiAccount}
-                  title="Viewers"
-                  size={1}
-                  color="lightgrey"
-                />{" "}
-                {twitchData.viewers}
-              </Typography>,
+              visualViewers,
             ]}
           />
         ) : (

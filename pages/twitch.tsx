@@ -88,7 +88,8 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}>
+          }}
+        >
           <Icon
             path={mdiCircle}
             title={twitchData.live ? "Live" : "Offline"}
@@ -112,7 +113,8 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}>
+          }}
+        >
           {twitchData.title}
         </Typography>
       ) : (
@@ -130,7 +132,8 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}>
+          }}
+        >
           <Icon path={mdiGamepad} title="Game" size={1} color="lightgrey" />{" "}
           {twitchData.game ? twitchData.game.name : ""}
         </Typography>
@@ -149,7 +152,8 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}>
+          }}
+        >
           <Icon
             path={mdiClockOutline}
             title="Time Since"
@@ -178,7 +182,8 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}>
+          }}
+        >
           <Icon path={mdiAccount} title="Viewers" size={1} color="lightgrey" />{" "}
           {twitchData.viewers}
         </Typography>
@@ -203,7 +208,8 @@ const PageTwitch: NextPage = () => {
         sx={{
           padding: theme.spacing(2, 3),
           height: "100%",
-        }}>
+        }}
+      >
         {twitchData ? (
           <GridComponent
             items={[
@@ -217,7 +223,8 @@ const PageTwitch: NextPage = () => {
                 variant="h2"
                 sx={{
                   fontSize: 34,
-                }}></Typography>,
+                }}
+              ></Typography>,
               visualViewers,
             ]}
           />

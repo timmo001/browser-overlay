@@ -1,4 +1,4 @@
-import { ApiClient } from "@twurple/api";
+import { ApiClient, HelixStream, HelixTag } from "@twurple/api";
 import { ChatClient } from "@twurple/chat";
 import { ClientCredentialsAuthProvider } from "@twurple/auth";
 
@@ -23,11 +23,15 @@ export class Twitch {
     await this.chatClient.connect();
   }
 
-  async isStreamLive(username: string): Promise<boolean> {
+  async getStream(username: string): Promise<HelixStream | null> {
     const user = await this.apiClient.users.getUserByName(username);
     if (!user) {
-      return false;
+      return null;
     }
-    return (await user.getStream()) !== null;
+    return await user.getStream();
+  }
+
+  async getTagNames(tags: Array<HelixTag>): Promise<Array<string>> {
+    for (const tag of tags) tag.getName("en");
   }
 }

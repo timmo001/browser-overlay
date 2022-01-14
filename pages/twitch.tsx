@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
+import { HelixGame, HelixTag, HelixUser } from "@twurple/api";
 import { mdiCircle } from "@mdi/js";
 import { useTheme } from "@mui/system";
 import Head from "next/head";
@@ -17,18 +18,24 @@ interface PageProps {
   };
 }
 
-interface ChannelData {
+interface TwitchData {
   name: string;
   live: boolean;
+  game?: HelixGame | null;
+  tags?: Array<HelixTag> | null;
+  thumbnail?: string;
+  title?: string;
+  user?: HelixUser | null;
+  viewers?: number;
 }
 
 let twitch: Twitch;
 
 const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
-  const [channelsData, setChannelsData] = useState<Array<ChannelData>>([]);
+  const [channelData, setChannel] = useState<TwitchData>();
 
   const router = useRouter();
-  const { channels } = router.query as NodeJS.Dict<string>;
+  const { channel } = router.query as NodeJS.Dict<string>;
 
   useEffect(() => {
     (async () => {
@@ -36,18 +43,30 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
         twitchCredentials.clientId,
         twitchCredentials.clientSecret
       );
-      if (channels) {
-        const newChannelsData = [];
-        for (const channel of channels.split(",")) {
-          newChannelsData.push({
+      if (channel) {
+        const stream = await twitch.getStream(channel);
+        if (!stream) {
+          setChannel({
             name: channel,
-            live: await twitch.isStreamLive(channel),
+            live: false,
           });
+          return;
         }
-        setChannelsData(newChannelsData);
+        console.log("stream:", stream);
+        const tags = await stream.getTags();
+        setChannel({
+          name: channel,
+          live: true,
+          game: await stream.getGame(),
+          tags: twitch.getTagNames(tags),
+          thumbnail: stream.thumbnailUrl,
+          title: stream.title,
+          user: await stream.getUser(),
+          viewers: stream.viewers,
+        });
       }
     })();
-  }, [channels, twitchCredentials.clientId, twitchCredentials.clientSecret]);
+  }, [channel, twitchCredentials.clientId, twitchCredentials.clientSecret]);
 
   const theme = useTheme();
 
@@ -65,35 +84,53 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
           padding: theme.spacing(2, 3),
           height: "100%",
         }}>
-        <GridComponent
-          items={[
-            <Typography key={0} component="span" variant="h2"></Typography>,
-            <Typography key={1} component="span" variant="h2"></Typography>,
-            <Typography key={2} component="span" variant="h2"></Typography>,
-            <Typography key={3} component="span" variant="h2"></Typography>,
-            <Typography
-              key={4}
-              component="span"
-              variant="h2"
-              sx={{
-                fontSize: 34,
-              }}>
-              {channelsData.map((channel: ChannelData, index: number) => (
-                <span key={index}>
-                  <Icon
-                    path={mdiCircle}
-                    title={channel.live ? "Live" : "Offline"}
-                    size={1}
-                    color={channel.live ? "red" : "gray"}
-                  />{" "}
-                  {channel.name}
-                  <br />
-                </span>
-              ))}
-            </Typography>,
-            <Typography key={5} component="span" variant="h2"></Typography>,
-          ]}
-        />
+        {channelData ? (
+          <GridComponent
+            items={[
+              <Typography key={0} component="span" variant="h2"></Typography>,
+              <Typography key={1} component="span" variant="h2"></Typography>,
+              <Typography
+                key={3}
+                component="span"
+                variant="h2"
+                sx={{
+                  fontSize: 34,
+                }}>
+                <Icon
+                  path={mdiCircle}
+                  title={channelData.live ? "Live" : "Offline"}
+                  size={1}
+                  color={channelData.live ? "red" : "gray"}
+                />{" "}
+                {channelData.user
+                  ? channelData.user.displayName
+                  : channelData.name}
+                <br />
+              </Typography>,
+              <Typography key={4} component="span" variant="h2"></Typography>,
+              <Typography
+                key={5}
+                component="span"
+                variant="h2"
+                sx={{
+                  fontSize: 34,
+                }}>
+                {channelData ? channelData.game : "No game"}
+              </Typography>,
+              <Typography
+                key={6}
+                component="span"
+                variant="h2"
+                sx={{
+                  fontSize: 34,
+                }}>
+                {channelData.game ? channelData.game.name : "No game"}
+              </Typography>,
+            ]}
+          />
+        ) : (
+          ""
+        )}
       </Box>
     </>
   );

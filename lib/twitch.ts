@@ -31,7 +31,12 @@ export class Twitch {
     return await user.getStream();
   }
 
-  async getTagNames(tags: Array<HelixTag>): Promise<Array<string>> {
-    for (const tag of tags) tag.getName("en");
+  getTagNames(tags: Array<HelixTag>): Array<string> {
+    const tagNames = [];
+    for (const tag of tags) {
+      const tagName = tag.getName("en");
+      if (tagName) tagNames.push(tagName);
+    }
+    return tagNames;
   }
 }

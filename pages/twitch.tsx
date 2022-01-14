@@ -21,18 +21,20 @@ interface PageProps {
 interface TwitchData {
   name: string;
   live: boolean;
-  game?: HelixGame | null;
-  tags?: Array<HelixTag> | null;
+  game?: {
+    name?: string;
+    boxArtUrl?: string;
+  };
+  tags?: Array<string>;
   thumbnail?: string;
   title?: string;
-  user?: HelixUser | null;
   viewers?: number;
 }
 
 let twitch: Twitch;
 
 const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
-  const [channelData, setChannel] = useState<TwitchData>();
+  const [twitchData, setTwitchData] = useState<TwitchData>();
 
   const router = useRouter();
   const { channel } = router.query as NodeJS.Dict<string>;
@@ -46,24 +48,31 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
       if (channel) {
         const stream = await twitch.getStream(channel);
         if (!stream) {
-          setChannel({
+          setTwitchData({
             name: channel,
             live: false,
           });
           return;
         }
         console.log("stream:", stream);
+        const game = await stream.getGame();
         const tags = await stream.getTags();
-        setChannel({
-          name: channel,
+        const newTwitchData: TwitchData = {
+          name: (await stream.getUser()).displayName,
           live: true,
-          game: await stream.getGame(),
+          game: game
+            ? {
+                name: game.name,
+                boxArtUrl: game.boxArtUrl,
+              }
+            : undefined,
           tags: twitch.getTagNames(tags),
           thumbnail: stream.thumbnailUrl,
           title: stream.title,
-          user: await stream.getUser(),
           viewers: stream.viewers,
-        });
+        };
+        console.log("newTwitchData:", newTwitchData);
+        setTwitchData(newTwitchData);
       }
     })();
   }, [channel, twitchCredentials.clientId, twitchCredentials.clientSecret]);
@@ -84,13 +93,11 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
           padding: theme.spacing(2, 3),
           height: "100%",
         }}>
-        {channelData ? (
+        {twitchData ? (
           <GridComponent
             items={[
-              <Typography key={0} component="span" variant="h2"></Typography>,
-              <Typography key={1} component="span" variant="h2"></Typography>,
               <Typography
-                key={3}
+                key={0}
                 component="span"
                 variant="h2"
                 sx={{
@@ -98,34 +105,51 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
                 }}>
                 <Icon
                   path={mdiCircle}
-                  title={channelData.live ? "Live" : "Offline"}
+                  title={twitchData.live ? "Live" : "Offline"}
                   size={1}
-                  color={channelData.live ? "red" : "gray"}
+                  color={twitchData.live ? "red" : "gray"}
                 />{" "}
-                {channelData.user
-                  ? channelData.user.displayName
-                  : channelData.name}
-                <br />
+                {twitchData.name}
               </Typography>,
-              <Typography key={4} component="span" variant="h2"></Typography>,
+              <Typography
+                key={1}
+                component="span"
+                variant="h2"
+                sx={{
+                  fontSize: 34,
+                }}>
+                {twitchData.title}
+              </Typography>,
+              <Typography
+                key={3}
+                component="span"
+                variant="h2"
+                sx={{
+                  fontSize: 34,
+                }}>
+                {twitchData.game ? twitchData.game.name : "No game"}
+              </Typography>,
+              <Typography
+                key={4}
+                component="span"
+                variant="h2"
+                sx={{
+                  fontSize: 34,
+                }}></Typography>,
               <Typography
                 key={5}
                 component="span"
                 variant="h2"
                 sx={{
                   fontSize: 34,
-                }}>
-                {channelData ? channelData.game : "No game"}
-              </Typography>,
+                }}></Typography>,
               <Typography
                 key={6}
                 component="span"
                 variant="h2"
                 sx={{
                   fontSize: 34,
-                }}>
-                {channelData.game ? channelData.game.name : "No game"}
-              </Typography>,
+                }}></Typography>,
             ]}
           />
         ) : (

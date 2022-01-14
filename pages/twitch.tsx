@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { mdiCircle } from "@mdi/js";
 import { useTheme } from "@mui/system";
 import Head from "next/head";
+import Icon from "@mdi/react";
 
 import GridComponent from "../components/grid";
 import { Twitch } from "../lib/twitch";
@@ -15,9 +17,16 @@ interface PageProps {
   };
 }
 
+interface ChannelData {
+  name: string;
+  live: boolean;
+}
+
 let twitch: Twitch;
 
 const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
+  const [channelsData, setChannelsData] = useState<Array<ChannelData>>([]);
+
   const router = useRouter();
   const { channels } = router.query as NodeJS.Dict<string>;
 
@@ -28,9 +37,14 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
         twitchCredentials.clientSecret
       );
       if (channels) {
+        const newChannelsData = [];
         for (const channel of channels.split(",")) {
-          console.log(channel, "live:", await twitch.isStreamLive(channel));
+          newChannelsData.push({
+            name: channel,
+            live: await twitch.isStreamLive(channel),
+          });
         }
+        setChannelsData(newChannelsData);
       }
     })();
   }, [channels, twitchCredentials.clientId, twitchCredentials.clientSecret]);
@@ -62,8 +76,21 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
               component="span"
               variant="h2"
               sx={{
-                fontSize: 42,
-              }}></Typography>,
+                fontSize: 34,
+              }}>
+              {channelsData.map((channel: ChannelData) => (
+                <span key={channel.name}>
+                  <Icon
+                    path={mdiCircle}
+                    title={channel.live ? "Live" : "Offline"}
+                    size={1}
+                    color={channel.live ? "red" : "gray"}
+                  />{" "}
+                  {channel.name}
+                  <br />
+                </span>
+              ))}
+            </Typography>,
             <Typography key={5} component="span" variant="h2"></Typography>,
           ]}
         />

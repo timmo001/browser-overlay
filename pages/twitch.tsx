@@ -41,7 +41,7 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
   const { channel } = router.query as NodeJS.Dict<string>;
 
   const getData = useCallback(async () => {
-    console.log("getData");
+    console.log("Get data..");
     if (!channel) return;
     const stream = await twitch.getStream(channel);
     if (!stream) {
@@ -51,7 +51,6 @@ const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
       });
       return;
     }
-    console.log("stream:", stream);
     const game = await stream.getGame();
     const newTwitchData: TwitchData = {
       name: (await stream.getUser()).displayName,

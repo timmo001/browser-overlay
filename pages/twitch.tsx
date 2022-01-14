@@ -1,12 +1,40 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
+import { useEffect } from "react";
 import { useTheme } from "@mui/system";
 import Head from "next/head";
-import Moment from "react-moment";
 
 import GridComponent from "../components/grid";
+import { Twitch } from "../lib/twitch";
 
-const PageHome: NextPage = () => {
+interface PageProps {
+  twitchCredentials: {
+    clientId: string;
+    clientSecret: string;
+  };
+}
+
+let twitch: Twitch;
+
+const PageTwitch: NextPage<PageProps> = ({ twitchCredentials }: PageProps) => {
+  const router = useRouter();
+  const { channels } = router.query as NodeJS.Dict<string>;
+
+  useEffect(() => {
+    (async () => {
+      twitch = new Twitch(
+        twitchCredentials.clientId,
+        twitchCredentials.clientSecret
+      );
+      if (channels) {
+        for (const channel of channels.split(",")) {
+          console.log(channel, "live:", await twitch.isStreamLive(channel));
+        }
+      }
+    })();
+  }, [channels, twitchCredentials.clientId, twitchCredentials.clientSecret]);
+
   const theme = useTheme();
 
   return (
@@ -22,8 +50,7 @@ const PageHome: NextPage = () => {
         sx={{
           padding: theme.spacing(2, 3),
           height: "100%",
-        }}
-      >
+        }}>
         <GridComponent
           items={[
             <Typography key={0} component="span" variant="h2"></Typography>,
@@ -36,10 +63,7 @@ const PageHome: NextPage = () => {
               variant="h2"
               sx={{
                 fontSize: 42,
-              }}
-            >
-              <Moment format="HH:mm:ss" interval={500} />
-            </Typography>,
+              }}></Typography>,
             <Typography key={5} component="span" variant="h2"></Typography>,
           ]}
         />
@@ -48,4 +72,15 @@ const PageHome: NextPage = () => {
   );
 };
 
-export default PageHome;
+export const getServerSideProps = async () => {
+  return {
+    props: {
+      twitchCredentials: {
+        clientId: process.env.TWITCH_CLIENT_ID,
+        clientSecret: process.env.TWITCH_CLIENT_SECRET,
+      },
+    },
+  };
+};
+
+export default PageTwitch;

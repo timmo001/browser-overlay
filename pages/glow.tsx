@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Box } from "@mui/material";
 import Head from "next/head";
 
-const Glow: NextPage = () => {
+const PageGlow: NextPage = () => {
   const router = useRouter();
   const { glow, height, thick, type, width } =
     router.query as NodeJS.Dict<string>;
@@ -41,4 +41,4 @@ const Glow: NextPage = () => {
   );
 };
 
-export default Glow;
+export default PageGlow;

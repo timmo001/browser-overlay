@@ -15,7 +15,7 @@
     "@mdi/react": "1.5.0",
     "@mui/icons-material": "5.3.1",
     "@mui/material": "5.3.1",
-    "@twurple/api": "5.0.13",
+    "@twurple/api": "5.0.14",
     "@twurple/auth": "5.0.13",
     "@twurple/chat": "5.0.13",
     "@twurple/eventsub": "5.0.14",

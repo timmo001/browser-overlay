@@ -512,6 +512,17 @@
     "@types/node-fetch" "^2.5.7"
     tslib "^2.0.3"
 
+"@twurple/api-call@^5.0.17":
+  version "5.0.17"
+  resolved "https://registry.yarnpkg.com/@twurple/api-call/-/api-call-5.0.17.tgz#3f08de2f0698c38b9a513dfb51bd9ff4b6e375c5"
+  integrity sha512-AvuAWzXBLU0gwrpyDjYJIKEK6NdOv1Z59pr6OpvB5EiojROtW/3ZePzr109wd90K8q3NvUjf8GPDBPXnTTjlsQ==
+  dependencies:
+    "@d-fischer/cross-fetch" "^4.0.2"
+    "@d-fischer/qs" "^7.0.2"
+    "@twurple/common" "^5.0.17"
+    "@types/node-fetch" "^2.5.7"
+    tslib "^2.0.3"
+
 "@twurple/api@5.0.14":
   version "5.0.14"
   resolved "https://registry.yarnpkg.com/@twurple/api/-/api-5.0.14.tgz#8f07036d288b1b952f4f197e685e729d38fc3717"
@@ -525,7 +536,7 @@
     "@twurple/common" "^5.0.14"
     tslib "^2.0.3"
 
-"@twurple/auth@5.0.14", "@twurple/auth@^5.0.14":
+"@twurple/auth@5.0.14":
   version "5.0.14"
   resolved "https://registry.yarnpkg.com/@twurple/auth/-/auth-5.0.14.tgz#2bb915809cd047cadfbac67526889c1f8ae0022f"
   integrity sha512-Y1u87HD2pE41uoEii17FCfxJ4PZfpH/FBLNr4SU7XCloCSp3MmrCImnXbiC3QVDRKHnIUEwd4zNStV3HTVFGGA==
@@ -534,6 +545,17 @@
     "@d-fischer/shared-utils" "^3.2.0"
     "@twurple/api-call" "^5.0.14"
     "@twurple/common" "^5.0.14"
+    tslib "^2.0.3"
+
+"@twurple/auth@^5.0.17":
+  version "5.0.17"
+  resolved "https://registry.yarnpkg.com/@twurple/auth/-/auth-5.0.17.tgz#8295670b024ababf3ff035f84ef39786d7180d2d"
+  integrity sha512-UevWCBcPhx6MEpnpyY6JA96X6EKfnm1GY9X+msH4PVanVYUnTH853heys4mpxMujfP6h5y1U33YY+zYocVRbQA==
+  dependencies:
+    "@d-fischer/logger" "^4.0.0"
+    "@d-fischer/shared-utils" "^3.2.0"
+    "@twurple/api-call" "^5.0.17"
+    "@twurple/common" "^5.0.17"
     tslib "^2.0.3"
 
 "@twurple/chat@5.0.14":
@@ -551,28 +573,28 @@
     ircv3 "^0.28.0"
     tslib "^2.0.3"
 
-"@twurple/common@^5.0.14":
-  version "5.0.14"
-  resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.0.14.tgz#6d10e5e06748cb6d09af2929288fee7fcfe1adc2"
-  integrity sha512-Sp6HfUisgKpHXZTtXu7i4ym6jCFJFfIH0Y5ziR9nFRThChJniivPEbrNmsmtBVTSD7TMzpOqBY3JO7cBLxBs6g==
+"@twurple/common@^5.0.14", "@twurple/common@^5.0.17":
+  version "5.0.17"
+  resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.0.17.tgz#12f77ed8abf2c6ad275f2250e6e30e2cf04c05e8"
+  integrity sha512-sK3NCH5USRf/LDp3DNPNHhRXVZNZFVc3PG+6ytBP8RHbnj01xSiG/2PjNAoztiKlrmpEcEIT6CKmnpkkw26P1A==
   dependencies:
     "@d-fischer/shared-utils" "^3.2.0"
     klona "^2.0.4"
     tslib "^2.0.3"
 
-"@twurple/eventsub@5.0.14":
-  version "5.0.14"
-  resolved "https://registry.yarnpkg.com/@twurple/eventsub/-/eventsub-5.0.14.tgz#1c3f27630eee47bf76d2379f72e8c538b406ee6c"
-  integrity sha512-R/yS/sSdTSyu3hmITne8aKxikJf54kMaPxpxw31UZANaP9q2kZGsbZ9irEU3YOnAOTINa73gdnbFtbATLGperQ==
+"@twurple/eventsub@5.0.17":
+  version "5.0.17"
+  resolved "https://registry.yarnpkg.com/@twurple/eventsub/-/eventsub-5.0.17.tgz#4269f27fc17ea2bc85a75857c9ee9d29d1e2b06e"
+  integrity sha512-3lq9SfeCbCW1QSKMMZ4q6aHXIV8M8giWWmv3+afA4shb/9FtDCSU1qV73UJsCCyr3N0JVD2NGjMWHva+5arhGg==
   dependencies:
     "@d-fischer/logger" "^4.0.0"
     "@d-fischer/raw-body" "^2.4.3"
     "@d-fischer/shared-utils" "^3.2.0"
     "@d-fischer/typed-event-emitter" "^3.2.2"
-    "@twurple/auth" "^5.0.14"
-    "@twurple/common" "^5.0.14"
+    "@twurple/auth" "^5.0.17"
+    "@twurple/common" "^5.0.17"
     "@types/express-serve-static-core" "^4.17.24"
-    httpanda "^0.4.4"
+    httpanda "^0.4.6"
     tslib "^2.0.3"
 
 "@twurple/pubsub@5.0.14":
@@ -1609,10 +1631,10 @@ http-errors@1.7.3:
     statuses ">= 1.5.0 < 2"
     toidentifier "1.0.0"
 
-httpanda@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/httpanda/-/httpanda-0.4.4.tgz#b34e2e81707b095fb8aec355c919cf1a680620f8"
-  integrity sha512-YbnQwrrzZRgPIzQrhEUO2FYKJbocSlxR2tT9ahN742+dGtoKPNQ5Dwvu3O/s6yUD7drW+f3IMgjBTzdRk9TlLg==
+httpanda@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/httpanda/-/httpanda-0.4.6.tgz#5ad2ff2ea0527a8b431a4c252c610a1c90a8dc36"
+  integrity sha512-R70BJcyoMtDj9GVQ7BIsb+Wwe/UCOGPYRv9+uHTFCDgTW+bSh8cg7XIo9W9yc1ad9viUHgDZ4zNS1A57S+qfjQ==
   dependencies:
     "@types/node" "^14.11.2"
     tslib "^2.0.3"

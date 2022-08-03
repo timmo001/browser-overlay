@@ -100,6 +100,11 @@
   resolved "https://registry.yarnpkg.com/@d-fischer/deprecate/-/deprecate-2.0.2.tgz#d1f0d40acc881edd771cace7992a1070460608c8"
   integrity sha512-wlw3HwEanJFJKctwLzhfOM6LKwR70FPfGZGoKOhWBKyOPXk+3a9Cc6S9zhm6tka7xKtpmfxVIReGUwPnMbIaZg==
 
+"@d-fischer/detect-node@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@d-fischer/detect-node/-/detect-node-3.0.1.tgz#7b051a86611b0396ba205aabae805b18cc642a78"
+  integrity sha512-0Rf3XwTzuTh8+oPZW9SfxTIiL+26RRJ0BRPwj5oVjZFyFKmsj9RGfN2zuTRjOuA3FCK/jYm06HOhwNK+8Pfv8w==
+
 "@d-fischer/escape-string-regexp@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@d-fischer/escape-string-regexp/-/escape-string-regexp-5.0.0.tgz#40b1d52529c5674caf510213efc9c982877d01c4"
@@ -143,6 +148,17 @@
   dependencies:
     "@d-fischer/logger" "^4.0.0"
     "@d-fischer/promise.allsettled" "^2.0.2"
+    "@types/node" "^12.12.5"
+    tslib "^2.0.3"
+
+"@d-fischer/rate-limiter@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@d-fischer/rate-limiter/-/rate-limiter-0.6.1.tgz#5134640e32831e22d190fc8a08b89dba38af3e87"
+  integrity sha512-SqsMxs77c/W9knmcX9ccy12ASq+E5UXzxU/ZIDAhZyll+2IqyikhgLQUu5n7bdxb3kox+TOSCIEFxDSSaGhcTA==
+  dependencies:
+    "@d-fischer/logger" "^4.0.0"
+    "@d-fischer/promise.allsettled" "^2.0.2"
+    "@d-fischer/shared-utils" "^3.2.0"
     "@types/node" "^12.12.5"
     tslib "^2.0.3"
 
@@ -507,28 +523,29 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.0.8.tgz#be3e914e84eacf16dbebd311c0d0b44aa1174c64"
   integrity sha512-ZK5v4bJwgXldAUA8r3q9YKfCwOqoHTK/ZqRjSeRXQrBXWouoPnS4MQtgC4AXGiiBuUu5wxrRgTlv0ktmM4P1Aw==
 
-"@twurple/api-call@^5.0.18":
-  version "5.0.18"
-  resolved "https://registry.yarnpkg.com/@twurple/api-call/-/api-call-5.0.18.tgz#ced8c16cafe7254bb597c9fa790d46b23a0fafb2"
-  integrity sha512-OTCuGdCOXo1CmpKJ2qKQ6Yn02I3GlRJ8M2pl41WdQgMEQUYO1dqrAik14f5GXwKmGYh1XFsEJKn66IP93gLehA==
+"@twurple/api-call@^5.0.18", "@twurple/api-call@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@twurple/api-call/-/api-call-5.2.0.tgz#2a2335f897de859fa8bc28a7b4e11b628fe79f51"
+  integrity sha512-dr12OoFd+1BROVLLIDlpo6K+K3aGdK13FG0zBjHbDvtLLQNY2OrSL/tGfcPUnfrffYaLGsu+xgZq+BrDbfdqww==
   dependencies:
     "@d-fischer/cross-fetch" "^4.0.2"
     "@d-fischer/qs" "^7.0.2"
-    "@twurple/common" "^5.0.18"
+    "@twurple/common" "^5.2.0"
     "@types/node-fetch" "^2.5.7"
     tslib "^2.0.3"
 
-"@twurple/api@5.0.18":
-  version "5.0.18"
-  resolved "https://registry.yarnpkg.com/@twurple/api/-/api-5.0.18.tgz#f7c414f7a507e2861ac5764019830c53c84602d8"
-  integrity sha512-ubf00qA6t+Az//zl4vFmOKR+axqwwmS9pIrHwUAS5jTqNlvVfxO73jtnRnoM45K4zHjt6yQvVZnum/uFUNM8yw==
+"@twurple/api@5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@twurple/api/-/api-5.2.0.tgz#4fd35df1672a0c9e2c88d9a8fe658a6adc93c4d9"
+  integrity sha512-ujALhaqWeJUiHShIYYbzj3AviYF5D7sdJAJj13E7D0oAsLio98i4QUqPuqt1LCkAblpn0CacNLsajATwpRlHbg==
   dependencies:
     "@d-fischer/cache-decorators" "^3.0.0"
+    "@d-fischer/detect-node" "^3.0.1"
     "@d-fischer/logger" "^4.0.0"
-    "@d-fischer/rate-limiter" "^0.4.4"
+    "@d-fischer/rate-limiter" "^0.6.1"
     "@d-fischer/shared-utils" "^3.2.0"
-    "@twurple/api-call" "^5.0.18"
-    "@twurple/common" "^5.0.18"
+    "@twurple/api-call" "^5.2.0"
+    "@twurple/common" "^5.2.0"
     tslib "^2.0.3"
 
 "@twurple/auth@5.0.18", "@twurple/auth@^5.0.18":
@@ -557,10 +574,10 @@
     ircv3 "^0.28.0"
     tslib "^2.0.3"
 
-"@twurple/common@^5.0.18":
-  version "5.0.18"
-  resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.0.18.tgz#28242777dac1ccad0f96451a76713a10d838728e"
-  integrity sha512-pyC1OOOqR4yAUPzgq1DwLyV1SAvVFeUPCgUIY03WtvIoJYL17I1JUNEYFnrBViXTQtjH6ucXprnOR2aQEKghSQ==
+"@twurple/common@^5.0.18", "@twurple/common@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.2.0.tgz#547c7eac0a08e05d57ee738f5eaef2941755c4a4"
+  integrity sha512-9w97ppHJH7L/Uf30haPsOIGKsOdMFM16g0KvGgYRgzvN03AfJJ2VY6K1/OeIXCI3Em8M5Sju3Rh+m1RDoqB1Mw==
   dependencies:
     "@d-fischer/shared-utils" "^3.2.0"
     klona "^2.0.4"

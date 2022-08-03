@@ -557,10 +557,10 @@
     ircv3 "^0.28.0"
     tslib "^2.0.3"
 
-"@twurple/common@^5.0.18":
-  version "5.0.18"
-  resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.0.18.tgz#28242777dac1ccad0f96451a76713a10d838728e"
-  integrity sha512-pyC1OOOqR4yAUPzgq1DwLyV1SAvVFeUPCgUIY03WtvIoJYL17I1JUNEYFnrBViXTQtjH6ucXprnOR2aQEKghSQ==
+"@twurple/common@^5.0.18", "@twurple/common@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.2.0.tgz#547c7eac0a08e05d57ee738f5eaef2941755c4a4"
+  integrity sha512-9w97ppHJH7L/Uf30haPsOIGKsOdMFM16g0KvGgYRgzvN03AfJJ2VY6K1/OeIXCI3Em8M5Sju3Rh+m1RDoqB1Mw==
   dependencies:
     "@d-fischer/shared-utils" "^3.2.0"
     klona "^2.0.4"
@@ -581,16 +581,16 @@
     httpanda "^0.4.6"
     tslib "^2.0.3"
 
-"@twurple/pubsub@5.0.18":
-  version "5.0.18"
-  resolved "https://registry.yarnpkg.com/@twurple/pubsub/-/pubsub-5.0.18.tgz#66b1edd09694c31c4afb1e88f6ee8e9a3ecfb03f"
-  integrity sha512-DGAZNyjTXd0EbFbIa8xwI+DM26cUK0o/zjqCttShMcK6oKyb6rnZcaFbOvKzOZXgGqKGYlSC1miRIZdK65q9WA==
+"@twurple/pubsub@5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@twurple/pubsub/-/pubsub-5.2.0.tgz#9b52749696e6694a008dfa608a722eb525acf6c0"
+  integrity sha512-cU0rqu70vD7R0dzPqdH0IjkFcVSwomz8ZtyWOHYHiaWg+FlCLsHb8G+4aDi/fcd0saND+JugnVcZmB2Qks+zsA==
   dependencies:
     "@d-fischer/connection" "^6.6.2"
     "@d-fischer/logger" "^4.0.0"
     "@d-fischer/shared-utils" "^3.2.0"
     "@d-fischer/typed-event-emitter" "^3.2.2"
-    "@twurple/common" "^5.0.18"
+    "@twurple/common" "^5.2.0"
     tslib "^2.0.3"
 
 "@types/express-serve-static-core@^4.17.24":

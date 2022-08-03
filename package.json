@@ -19,7 +19,7 @@
     "@twurple/auth": "5.0.18",
     "@twurple/chat": "5.0.18",
     "@twurple/eventsub": "5.0.18",
-    "@twurple/pubsub": "5.0.18",
+    "@twurple/pubsub": "5.2.0",
     "moment": "2.29.1",
     "next": "12.1.5",
     "react": "17.0.2",

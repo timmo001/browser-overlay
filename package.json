@@ -21,7 +21,7 @@
     "@twurple/eventsub": "5.0.18",
     "@twurple/pubsub": "5.2.1",
     "moment": "2.29.1",
-    "next": "12.1.5",
+    "next": "12.2.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-moment": "1.1.2",

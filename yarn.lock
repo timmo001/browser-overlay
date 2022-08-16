@@ -603,16 +603,16 @@
     httpanda "^0.4.6"
     tslib "^2.0.3"
 
-"@twurple/pubsub@5.0.18":
-  version "5.0.18"
-  resolved "https://registry.yarnpkg.com/@twurple/pubsub/-/pubsub-5.0.18.tgz#66b1edd09694c31c4afb1e88f6ee8e9a3ecfb03f"
-  integrity sha512-DGAZNyjTXd0EbFbIa8xwI+DM26cUK0o/zjqCttShMcK6oKyb6rnZcaFbOvKzOZXgGqKGYlSC1miRIZdK65q9WA==
+"@twurple/pubsub@5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@twurple/pubsub/-/pubsub-5.2.1.tgz#3eb90f8195f7bd65e2a714414c838029460e0f26"
+  integrity sha512-7uhpNgWJ1vKcCx706JuGPHN8P17FAvWI4+PbwXVzuP9kICXjYvjPmGdfbWBpvIyGB2BIYfU6FW9qUrB0rWYRmQ==
   dependencies:
     "@d-fischer/connection" "^6.6.2"
     "@d-fischer/logger" "^4.0.0"
     "@d-fischer/shared-utils" "^3.2.0"
     "@d-fischer/typed-event-emitter" "^3.2.2"
-    "@twurple/common" "^5.0.18"
+    "@twurple/common" "^5.2.1"
     tslib "^2.0.3"
 
 "@types/express-serve-static-core@^4.17.24":

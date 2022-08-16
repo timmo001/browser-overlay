@@ -2,18 +2,32 @@ import type { NextPage } from "next";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { Box, Typography } from "@mui/material";
-import { mdiAccount, mdiCircle, mdiClockOutline, mdiGamepad } from "@mdi/js";
+import {
+  mdiAccount,
+  mdiCircle,
+  mdiClockOutline,
+  mdiGamepad,
+  mdiTimer,
+} from "@mdi/js";
 import { useTheme } from "@mui/system";
 import Head from "next/head";
 import Icon from "@mdi/react";
-import Moment from "react-moment";
+import moment, { Moment } from "moment";
+import ReactMoment from "react-moment";
 
-import GridComponent from "../components/grid";
 import { Twitch } from "../lib/twitch";
+import GridComponent from "../components/grid";
+
+interface TimerData {
+  time: Moment;
+  incrementPerBit?: number;
+  incrementPerDonation?: number;
+  incrementPerSubscription?: number;
+}
 
 interface TwitchData {
-  name: string;
-  live: boolean;
+  name?: string;
+  live?: boolean;
   game?: {
     name?: string;
     boxArtUrl?: string;
@@ -29,6 +43,7 @@ let twitch: Twitch;
 
 const PageTwitch: NextPage = () => {
   const [twitchData, setTwitchData] = useState<TwitchData>();
+  const [timerData, setTimerData] = useState<TimerData>();
 
   const router = useRouter();
   const {
@@ -39,6 +54,8 @@ const PageTwitch: NextPage = () => {
     live,
     title,
     uptime,
+    timer,
+    timerStartAt,
     viewers,
   } = router.query as NodeJS.Dict<string>;
 
@@ -73,11 +90,27 @@ const PageTwitch: NextPage = () => {
     setTwitchData(newTwitchData);
   }, [channel]);
 
+  const setupTimer = useCallback(() => {
+    if (timerData) return;
+    console.log("Setup timer..");
+    const start = moment();
+    const newTimerData: TimerData = {
+      time: start.add(timerStartAt ? Number(timerStartAt) : 3600, "seconds"),
+      // incrementPerBit: timer.incrementPerBit,
+      // incrementPerDonation: timer.incrementPerDonation,
+      // incrementPerSubscription: timer.incrementPerSubscription,
+    };
+    console.log("Timer data:", newTimerData);
+    setTimerData(newTimerData);
+  }, [timerData, timerStartAt]);
+
   useEffect(() => {
+    if (!clientId || !clientSecret || !channel) return;
     twitch = new Twitch(clientId as string, clientSecret as string);
+    setupTimer();
     getData();
-    setTimeout(async () => getData(), 60000);
-  }, [getData, clientId, clientSecret]);
+    setTimeout(() => getData(), 60000);
+  }, [clientId, clientSecret, channel, getData, setupTimer]);
 
   const visualLive = useMemo(
     () =>
@@ -88,8 +121,7 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           <Icon
             path={mdiCircle}
             title={twitchData.live ? "Live" : "Offline"}
@@ -113,8 +145,7 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           {twitchData.title}
         </Typography>
       ) : (
@@ -132,8 +163,7 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           <Icon path={mdiGamepad} title="Game" size={1} color="lightgrey" />{" "}
           {twitchData.game ? twitchData.game.name : ""}
         </Typography>
@@ -152,15 +182,14 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           <Icon
             path={mdiClockOutline}
             title="Time Since"
             size={1}
             color="lightgrey"
           />{" "}
-          <Moment
+          <ReactMoment
             date={twitchData.startDate}
             durationFromNow
             format="HH:mm:ss"
@@ -173,6 +202,30 @@ const PageTwitch: NextPage = () => {
     [uptime, twitchData]
   );
 
+  const visualTimer = useMemo(
+    () =>
+      timer === "true" && timerData ? (
+        <Typography
+          key={5}
+          component="span"
+          variant="h2"
+          sx={{
+            fontSize: 34,
+          }}>
+          <Icon path={mdiTimer} title="Timer" size={1} color="lightgrey" />{" "}
+          <ReactMoment
+            date={timerData.time}
+            durationFromNow
+            format="HH:mm:ss"
+            interval={500}
+          />
+        </Typography>
+      ) : (
+        <Typography key={5} />
+      ),
+    [timer, timerData]
+  );
+
   const visualViewers = useMemo(
     () =>
       viewers === "true" && twitchData ? (
@@ -182,8 +235,7 @@ const PageTwitch: NextPage = () => {
           variant="h2"
           sx={{
             fontSize: 34,
-          }}
-        >
+          }}>
           <Icon path={mdiAccount} title="Viewers" size={1} color="lightgrey" />{" "}
           {twitchData.viewers}
         </Typography>
@@ -208,8 +260,7 @@ const PageTwitch: NextPage = () => {
         sx={{
           padding: theme.spacing(2, 3),
           height: "100%",
-        }}
-      >
+        }}>
         {twitchData ? (
           <GridComponent
             items={[
@@ -217,14 +268,7 @@ const PageTwitch: NextPage = () => {
               visualTitle,
               visualGame,
               visualUptime,
-              <Typography
-                key={4}
-                component="span"
-                variant="h2"
-                sx={{
-                  fontSize: 34,
-                }}
-              ></Typography>,
+              visualTimer,
               visualViewers,
             ]}
           />

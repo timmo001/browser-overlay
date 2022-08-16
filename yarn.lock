@@ -549,7 +549,7 @@
   dependencies:
     tslib "^2.4.0"
 
-"@twurple/api-call@^5.0.18", "@twurple/api-call@^5.2.1":
+"@twurple/api-call@^5.2.1":
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/@twurple/api-call/-/api-call-5.2.1.tgz#84094b58e47abca072e8cffa665040258e47ccf2"
   integrity sha512-wWYOLuqLHNlhzrf2gYJZn8J3jbIJw0SIYQDROh2Vp9PCa8vkbOD1/JJwWtkJc/fmtNerYZnunby4faD7FVkD8w==
@@ -574,18 +574,7 @@
     "@twurple/common" "^5.2.1"
     tslib "^2.0.3"
 
-"@twurple/auth@5.0.18":
-  version "5.0.18"
-  resolved "https://registry.yarnpkg.com/@twurple/auth/-/auth-5.0.18.tgz#a0775c266b7fc74b63e974b78bbaa06df5847eec"
-  integrity sha512-ktwwGmmXWTu3JmTZCweuH/NntzFNtC96+c5setbPb12h/q7HjCJxdvmBbGFbUgipFnZ9Z7iQGS2s5WPwK2IAsA==
-  dependencies:
-    "@d-fischer/logger" "^4.0.0"
-    "@d-fischer/shared-utils" "^3.2.0"
-    "@twurple/api-call" "^5.0.18"
-    "@twurple/common" "^5.0.18"
-    tslib "^2.0.3"
-
-"@twurple/auth@^5.2.1":
+"@twurple/auth@5.2.1", "@twurple/auth@^5.2.1":
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/@twurple/auth/-/auth-5.2.1.tgz#38db40ad65690982e04c25fd7ce6756ef5e380dc"
   integrity sha512-/fAI6DXa/P8sQuEazI4LbKUAg3Xkp2Ke3VP7wzhnggTfe/KI5WZE/piyq8861ucaK5HMtchtYjKYFKnPPRXi4A==
@@ -611,7 +600,7 @@
     ircv3 "^0.29.3"
     tslib "^2.0.3"
 
-"@twurple/common@^5.0.18", "@twurple/common@^5.2.1":
+"@twurple/common@^5.2.1":
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/@twurple/common/-/common-5.2.1.tgz#7dfd04d3bbe42ab618b6cad79677be5de0cefc51"
   integrity sha512-EenvxcKCQAQT/AC+puWw4+N9q8/Dt8qxWzFGcBL/FEJArpb7KyY1nACAfln73vbzCh2OqhPc0TdbM0J/MvF16w==
@@ -2770,12 +2759,7 @@ tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.3, tslib@^2.1.0:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
-  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
-
-tslib@^2.4.0:
+tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==

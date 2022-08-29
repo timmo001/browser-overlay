@@ -17,7 +17,7 @@
     "@mui/material": "5.10.1",
     "@twurple/api": "5.2.1",
     "@twurple/auth": "5.2.1",
-    "@twurple/chat": "5.2.1",
+    "@twurple/chat": "5.2.3",
     "@twurple/eventsub": "5.2.1",
     "@twurple/pubsub": "5.2.1",
     "moment": "2.29.1",

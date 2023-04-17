@@ -18,7 +18,7 @@
     "@twurple/api": "5.2.7",
     "@twurple/auth": "5.2.5",
     "@twurple/chat": "5.2.5",
-    "@twurple/eventsub": "5.2.1",
+    "@twurple/eventsub": "5.3.4",
     "@twurple/pubsub": "5.2.5",
     "moment": "2.29.1",
     "next": "13.3.0",

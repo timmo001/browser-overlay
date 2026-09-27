@@ -18,14 +18,14 @@ concurrency:
 
 jobs:
   lint-eslint:
-    uses: timmo001/workflows/.github/workflows/lint-eslint.yml@master
+    uses: timmo001/workflows/.github/workflows/lint-eslint.yml@0f94251168336b74fadf271a955d24d1de4de343 # 20260927.1
   lint-jsonlint:
-    uses: timmo001/workflows/.github/workflows/lint-jsonlint.yml@master
+    uses: timmo001/workflows/.github/workflows/lint-jsonlint.yml@0f94251168336b74fadf271a955d24d1de4de343 # 20260927.1
   lint-markdown-links:
-    uses: timmo001/workflows/.github/workflows/lint-markdown-links.yml@master
+    uses: timmo001/workflows/.github/workflows/lint-markdown-links.yml@0f94251168336b74fadf271a955d24d1de4de343 # 20260927.1
   lint-markdownlint:
-    uses: timmo001/workflows/.github/workflows/lint-markdownlint.yml@master
+    uses: timmo001/workflows/.github/workflows/lint-markdownlint.yml@0f94251168336b74fadf271a955d24d1de4de343 # 20260927.1
   lint-prettier:
-    uses: timmo001/workflows/.github/workflows/lint-prettier.yml@master
+    uses: timmo001/workflows/.github/workflows/lint-prettier.yml@0f94251168336b74fadf271a955d24d1de4de343 # 20260927.1
   lint-yamllint:
-    uses: timmo001/workflows/.github/workflows/lint-yamllint.yml@master
+    uses: timmo001/workflows/.github/workflows/lint-yamllint.yml@0f94251168336b74fadf271a955d24d1de4de343 # 20260927.1

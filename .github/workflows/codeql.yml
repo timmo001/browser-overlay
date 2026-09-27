@@ -18,4 +18,4 @@ concurrency:
 
 jobs:
   codeql-analyze-javascript:
-    uses: timmo001/workflows/.github/workflows/codeql-javascript.yml@master
+    uses: timmo001/workflows/.github/workflows/codeql-javascript.yml@0f94251168336b74fadf271a955d24d1de4de343 # 20260927.1

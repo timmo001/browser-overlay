@@ -14,4 +14,4 @@ on:
 
 jobs:
   build-node-linux:
-    uses: timmo001/workflows/.github/workflows/build-node-linux.yml@master
+    uses: timmo001/workflows/.github/workflows/build-node-linux.yml@0f94251168336b74fadf271a955d24d1de4de343 # 20260927.1
